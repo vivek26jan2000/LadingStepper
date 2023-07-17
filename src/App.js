@@ -5,7 +5,12 @@ import LoadingStepper from "./LoadingStepper";
 function App() {
   return (
     <div>
-      <header>
+      <header
+        style={{
+          width: "700px",
+          margin: "auto",
+          marginTop: "50px",
+        }}>
         <LoadingStepper />
       </header>
     </div>

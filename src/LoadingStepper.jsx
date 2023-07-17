@@ -41,7 +41,7 @@ export default function LoadingStepper() {
       if (!completed[activeStep]) {
         handleComplete();
       }
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [activeStep, completed]);
