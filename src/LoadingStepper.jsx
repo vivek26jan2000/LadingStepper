@@ -5,12 +5,29 @@ import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { CircularProgress } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 const steps = [
   "Select campaign settings",
   "Create an ad group",
   "Create an ad",
 ];
+
+const stepStyle = {
+  "& .Mui-active": {
+    "&.MuiStepIcon-root": {},
+    "& .MuiStepConnector-line": {
+      borderLeft: "2px solid blue",
+    },
+  },
+  "& .Mui-completed": {
+    "&.MuiStepIcon-root": {},
+    "& .MuiStepConnector-line": {
+      borderLeft: "2px solid blue",
+    },
+  },
+};
 
 export default function LoadingStepper() {
   const [activeStep, setActiveStep] = useState(0);
@@ -50,6 +67,7 @@ export default function LoadingStepper() {
     const newCompleted = { ...completed };
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
+
     handleNext();
   };
 
@@ -68,10 +86,23 @@ export default function LoadingStepper() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Stepper nonLinear activeStep={activeStep} orientation="vertical">
+      <Stepper
+        sx={stepStyle}
+        nonLinear
+        activeStep={activeStep}
+        orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>
-            <StepButton color="inherit" onClick={handleStep(index)}>
+            <StepButton
+              color="inherit"
+              onClick={handleStep(index)}
+              icon={
+                activeStep === index && activeStep < 2 ? (
+                  <CircularProgress size={24} />
+                ) : (
+                  ""
+                )
+              }>
               {label}
             </StepButton>
           </Step>
